@@ -2,13 +2,18 @@ var start = document.querySelector("#start-button");
 var timer = document.querySelector(".timer");
 var quest =document.querySelector(".question");
 var snaggy =document.querySelectorAll("h2");
+var divvy = document.querySelector("questiondiv");
 let hs = "high score"
-start.addEventListener("click", function() {
- // if statement
-    localStorage.setItem("High Score", hs);
-  }
-);
+var score = [];
+let qnum=0;
 
+const div = document.querySelector('body')
+
+div.addEventListener("click", (event) => {
+  if(event.target.tagName === 'BUTTON') {
+    console.log(event.target.innerText)
+  }
+})
 var count = localStorage.getItem("High Score");
 var secondsLeft =100;
 console.log(count);
@@ -30,36 +35,82 @@ function setTime() {
 }
 
 
+
 let q1 = ["Commonly used data types include","Strings","booleans","alerts","numbers"
 ];
 console.log(q1);
-let q2 = ["The condition in an if/else statement is enclosed within ______ ","quotes","curly braces","parentheses","square brackets"
+
+
+let q2 = ["The condition in an if/else statement is enclosed within ______ ","quotes","curly braces","parentheses","square brackets","parentheses"
 ];
-let q3 = ["Arrays in JavaScript can be used to store","numbers and strings","other arrays","booleans","all of the above"
+let q3 = ["Arrays in JavaScript can be used to store","numbers and strings","other arrays","booleans","all of the above","all of the above"
 ];
-let q4 = ["String values must be enclosed within _______ when being assigned to variables","commas","curley braces","quotes","parentheses"
+let q4 = ["String values must be enclosed within _______ when being assigned to variables","commas","curley braces","quotes","parentheses","quotes"
 ];
-let q5 = ["A very useful tool used during deveolpment and debugging for printing content to the debugger is","JavaScipt","terminal/bash","for loops","console log"
+let q5 = ["A very useful tool used during deveolpment and debugging for printing content to the debugger is","JavaScipt","terminal/bash","for loops","console log","console log"
 ];
 
-let q1create = document.createElement("h2");
-q1create.textContent=q1[0];
+//feed this the question
+actualQuestion=q2;
+
+qnum=1;
+if (qnum==1) {
+let q1create = document.createElement("button");
+q1create.innerText=actualQuestion[0];
 document.body.appendChild(q1create);
-let q2create = document.createElement("h2");
-q2create.textContent=q1[1];
-document.body.appendChild(q2create);
-let q3create = document.createElement("h2");
-q3create.textContent=q1[2];
-document.body.appendChild(q3create);
-let q4create = document.createElement("h2");
-q4create.textContent=q1[3];
-document.body.appendChild(q4create);
-let q5create = document.createElement("h2");
-q5create.textContent=q1[4];
-document.body.appendChild(q5create);
+console.log(q1create.innerText);
 
+let q2create = document.createElement("button");
+q2create.innerText=actualQuestion[1];
+document.body.appendChild(q2create);
+console.log(q2create.innerText);
+
+let q3create = document.createElement("button");
+q3create.innerText=actualQuestion[2];
+document.body.appendChild(q3create);
+console.log(q3create.innerText);
+
+let q4create = document.createElement("button");
+q4create.innerText=actualQuestion[3];
+document.body.appendChild(q4create);
+console.log(q4create.innerText);
+
+let q5create = document.createElement("button");
+q5create.innerText=actualQuestion[4];
+document.body.appendChild(q5create);
+console.log(q5create.innerText);
+}
 setTime();
+
+
+//var next = carousel.querySelector(".next");`
+
+
 /*
+var container = document.querySelector(".container");
+
+container.addEventListener("click", function(event) {
+  var element = event.target;
+
+  if (element.matches(".box")) {
+    var state = element.getAttribute("data-state");
+
+    // Use an if statement to conditionally render the number on the card
+    if (state === "hidden") {
+      // If the card is clicked while the state is "hidden", we set .textContent to the number 
+      element.textContent = element.dataset.number;
+      // Using the dataset property, we change the state to visible because the user can now see the number
+      element.dataset.state = "visible";
+   
+    } else {
+      // 'Hide' the number by setting .textContent to an empty string
+      element.textContent= "";
+      // Use .setAttribute() method
+      element.setAttribute("data-state", "hidden")
+     
+    }  
+  }
+
 var wordBlank = document.querySelector(".word-blanks");
 var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");

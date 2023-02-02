@@ -1,3 +1,19 @@
+#hidden{
+    display: none;
+}
+#unhidden{
+    display: contents;
+    background-color: black;
+}
+
+.answer{
+    display: flex;
+    position: fixed;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    font-size: 2em;
+}
 body {
     display: flex;
     flex-flow: row wrap;
@@ -60,14 +76,10 @@ header{
             color: cyan;
         }
 
-        .answer{            width: 100vw;
-            text-align: center;
-
-            background: none;
 
 
-        }
 
-        .answerkey{
-            padding-top: 10vh;
+        .initials{
+            border-radius: 2px;
+            border-color: azure;
         }

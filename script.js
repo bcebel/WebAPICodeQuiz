@@ -19,21 +19,24 @@ var questions = [{
   },{
   question: "A very useful tool used during deveolpment and debugging for printing content to the debugger is",
   answers: ["JavaScript","terminal/bash","for loops","console log"],
-  answer: "cossole log",
+  answer: "console log",
   score: 22,
   
   }];
 
-console.log(questions[4].score);
 
 var start = document.querySelector(".start-button");
 var timer = document.querySelector(".timer");
 var displayQA =document.getElementsByClassName("list");
 var hs = "high score";
-var secondsLeft =10;
+var secondsLeft =45;
 var body;
 var quest;
 var i=0;
+var score =0;
+var count = localStorage.getItem("High Score");
+var m;
+
 
 
 //Functions
@@ -44,12 +47,11 @@ function setTime() {start.remove();play();
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timer.textContent = secondsLeft + " seconds left!!";
-    if(secondsLeft === 0) {timer.textContent="Time's up!"
+    if(secondsLeft === 0 || i==4) {if(secondsLeft === 0){timer.textContent="Time's up!";}else{timer.textContent="Let's see how you did!"}
   
       // Stops execution of action at set interval
       clearInterval(timerInterval);
 end();
-     // sendMessage();
     }
   }, 1000);
 }
@@ -72,10 +74,9 @@ divvy.append(a1);
 
 a1.addEventListener("click", (event) => {
   if(event.target.tagName === 'BUTTON') {
-    console.log(event.target.innerText);
     if(event.target.innerText == questions[i].answer){keys.append(correct);
-      console.log("correct");}else{keys.append(incorrect);
-        console.log("wrong")
+      ;score++}else{keys.append(incorrect);
+        ; secondsLeft=secondsLeft-5;
       }}});
       a1.addEventListener("click",add);
 
@@ -86,10 +87,9 @@ divvy.append(a2);
 
 a2.addEventListener("click", (event) => {
   if(event.target.tagName === 'BUTTON') {
-    console.log(event.target.innerText);
     if(event.target.innerText == questions[i].answer){keys.append(correct);
-      console.log("correct");}else{keys.append(incorrect);
-        console.log("wrong")
+  score++}else{keys.append(incorrect);
+  secondsLeft=secondsLeft-5;
       }}});
       a2.addEventListener("click",add);
 
@@ -100,12 +100,11 @@ divvy.append(a3);
 
 a3.addEventListener("click", (event) => {
   if(event.target.tagName === 'BUTTON') {
-    console.log(event.target.innerText);
     if(event.target.innerText == questions[i].answer){
       keys.append(correct);
-      console.log("correct");}else{keys.append(incorrect);
-        console.log("wrong")
-        console.log(questions[i].answer)
+      score++}else{keys.append(incorrect);
+        secondsLeft=secondsLeft-5;
+        
       }}});
       a3.addEventListener("click",add);
 
@@ -116,11 +115,9 @@ divvy.append(a4);
 
 a4.addEventListener("click", (event) => {
   if(event.target.tagName === 'BUTTON') {
-    console.log(event.target.innerText);
     if(event.target.innerText == questions[i].answer){keys.append(correct);
-      console.log("correct");
     }else{keys.append(incorrect);
-        console.log("wrong")
+        secondsLeft=secondsLeft-5;
       }}});
       a4.addEventListener("click",add);
 
@@ -130,10 +127,10 @@ a5.setAttribute("class","ans")
 
 a5.addEventListener("click", (event) => {
   if(event.target.tagName === 'BUTTON') {
-    console.log(event.target.innerText);
+    
     if(event.target.innerText == questions[i].answer){keys.append(correct);
-      console.log("correct");}else{
-        console.log("wrong")
+      score++}else{keys.append(incorrect);
+        secondsLeft=secondsLeft-5;
       }}});
       divvy.append(a5);
 a5.addEventListener("click",add);
@@ -146,7 +143,23 @@ var incorrect=document.createElement("div");
 incorrect.textContent="WRONG";
 start.addEventListener("click", setTime);
 
-var end = function(){a1.innerText="YOUR SCORE"}
+var hide=function(){unhiding = document.body;
+  var grab = document.getElementById("hidden");
+  grab.setAttribute("id","unhidden")
+  unhiding.append(grab);
+console.log(grab);
+}
+var end = function(){
+quest.innerText="Game Over";
+a1.innerText="YOUR SCORE";
+a2.innerText=score/5*100;
+a3.textContent=""
+a4.textContent="";
+a5.textContent="";
+localStorage.setItem("score", score/5*100);
+hide();
+}
+
 
 var add=function(){      if (i==4){
   quest.innerText="Game Over";end();} else{
@@ -156,6 +169,13 @@ var add=function(){      if (i==4){
   a3.remove();
   a4.remove();
   a5.remove();
-  var answerduration = setInterval(function() {correct.remove(); incorrect.remove()},1000);
+  var answerduration = setInterval(function() {correct.remove(); incorrect.remove()},1500);
   i++;play()
 }}
+
+var myFunction=function(){
+console.log("yadda");
+a4.textContent=document.getElementById("myText").value + ' '+score/5*100;
+
+
+};

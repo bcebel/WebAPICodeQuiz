@@ -47,7 +47,7 @@ function setTime() {start.remove();play();
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timer.textContent = secondsLeft + " seconds left!!";
-    if(secondsLeft === 0 || i==4) {if(secondsLeft === 0){timer.textContent="Time's up!";}else{timer.textContent="Let's see how you did!"}
+    if(secondsLeft === 0) {timer.textContent="Time's up!";
   
       // Stops execution of action at set interval
       clearInterval(timerInterval);
@@ -115,7 +115,7 @@ divvy.append(a4);
 
 a4.addEventListener("click", (event) => {
   if(event.target.tagName === 'BUTTON') {
-    if(event.target.innerText == questions[i].answer){keys.append(correct);
+    if(event.target.innerText == questions[i].answer){keys.append(correct); score++
     }else{keys.append(incorrect);
         secondsLeft=secondsLeft-5;
       }}});
@@ -124,7 +124,7 @@ a4.addEventListener("click", (event) => {
 a5 =document.createElement("button")
 a5.innerText=questions[i].answers[4];
 a5.setAttribute("class","ans")
-
+divvy.append(a5);
 a5.addEventListener("click", (event) => {
   if(event.target.tagName === 'BUTTON') {
     
@@ -147,12 +147,12 @@ var hide=function(){unhiding = document.body;
   var grab = document.getElementById("hidden");
   grab.setAttribute("id","unhidden")
   unhiding.append(grab);
-console.log(grab);
 }
 var end = function(){
 quest.innerText="Game Over";
 a1.innerText="YOUR SCORE";
-a2.innerText=score/5*100;
+timer.remove();
+a2.textContent="";
 a3.textContent=""
 a4.textContent="";
 a5.textContent="";
@@ -162,7 +162,7 @@ hide();
 
 
 var add=function(){      if (i==4){
-  quest.innerText="Game Over";end();} else{
+  quest.innerText="Game Over";end();secondsLeft=0;} else{
   quest.remove();
   a1.remove();
   a2.remove();
@@ -175,7 +175,7 @@ var add=function(){      if (i==4){
 
 var myFunction=function(){
 console.log("yadda");
-a4.textContent=document.getElementById("myText").value + ' '+score/5*100;
+a2.textContent=document.getElementById("myText").value + ' '+score/5*100;
 
 
 };

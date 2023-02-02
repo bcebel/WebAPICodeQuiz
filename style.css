@@ -4,6 +4,7 @@
 #unhidden{
     display: contents;
     background-color: black;
+
 }
 
 .answer{
@@ -32,6 +33,7 @@ body {
 header{
     width: 100vw;
     text-align: center;}
+
     #timer{
         justify-content: center;
     }
@@ -82,4 +84,5 @@ header{
         .initials{
             border-radius: 2px;
             border-color: azure;
+
         }

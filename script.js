@@ -40,9 +40,6 @@ var i=0;
 var score =0;
 //var history = localStorage.getItem("High Score");
 var count = JSON.parse(localStorage.getItem("High Score"));
-
-console.log(count[1]);
-console.log(count[2]);
 var m;
 
 
@@ -196,12 +193,10 @@ quest.textContent="You made it onto the leader board!  Nice job!"
 } else {quest.textContent="You joined the dark side!  Try again"}
 
 localStorage.setItem("High Score", JSON.stringify(count));
-console.log(record.scre + " " + record.plyr);
 a2.textContent="High Scores"
 a3.textContent=count[1] +" "+count[2];
 a4.textContent=count[3] +" "+count[4];
 a5.textContent=count[5] +" "+count[6];
-console.log(history);
 };
 
 

@@ -40,6 +40,8 @@ var i=0;
 var score =0;
 //var history = localStorage.getItem("High Score");
 var count = JSON.parse(localStorage.getItem("High Score"));
+var k=6;
+localStorage.setItem("cycle", k); 
 var m;
 
 
@@ -150,7 +152,7 @@ start.addEventListener("click", setTime);
 
 var hide=function(){unhiding = document.body;
   var grab = document.getElementById("hidden");
-  grab.setAttribute("id","unhidden")
+  grab.setAttribute("id","unhidden");
   unhiding.append(grab);
 }
 var end = function(){
@@ -168,7 +170,9 @@ hide();
 
 
 var add=function(){      if (i==4){
-  quest.innerText="Game Over, enter your initials for your score!";end();secondsLeft=0;} else{
+  quest.innerText="Game Over, enter your initials for your score!";
+  end();
+  secondsLeft=0;} else{
   quest.remove();
   a1.remove();
   a2.remove();
@@ -185,18 +189,20 @@ a1.textContent=document.getElementById("myText").value + ' '+score/5*100;
 inits=document.getElementById("myText").value;
 record.scre=score/5*100;
 record.plyr=document.getElementById("myText").value;
-
+if (count[1] ==null){console.log('no bueno')};
 if (record.scre > count[2] ||record.scre > count[4] || record.scre > count[6] || record.scre==100){
 count.unshift(record.plyr);
 count.unshift(record.scre);
-quest.textContent="You made it onto the leader board!  Nice job!"
+quest.textContent="You Made it to the Top 4!"
 } else {quest.textContent="You joined the dark side!  Try again"}
 
 localStorage.setItem("High Score", JSON.stringify(count));
+console.log(record.scre + " " + record.plyr);
 a2.textContent="High Scores"
 a3.textContent=count[1] +" "+count[2];
 a4.textContent=count[3] +" "+count[4];
 a5.textContent=count[5] +" "+count[6];
+console.log(history);
 };
 
 

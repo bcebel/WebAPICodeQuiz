@@ -1,19 +1,15 @@
 //Global Variables
-
+var sortable;
 data = [
  // {"name": "John Doe", "score": 0},
-  {"":"","":""},
+  {"name":"","score":""},
 
-]
-var add_new_entry
-var new_data
-var new_entry
+];
+var add_new_entry;
+var new_data;
+var new_entry;
 var allScores;
-var allScores;
-var highScore;
 var lastScores;
-var blah;
-var memory;
 var questions = [
   {
     question: "Commonly used data types do not include",
@@ -52,7 +48,6 @@ var questions = [
   },
 ];
 
-
 var start = document.querySelector(".start-button");
 var timer = document.querySelector(".timer");
 var displayQA = document.getElementsByClassName("list");
@@ -78,7 +73,7 @@ function setTime() {
       timer.textContent = "Time's up!";
 
       // Stops execution of action at set interval
-      //clearInterval(timerInterval);
+      clearInterval(timerInterval);
       end();
     }
   }, 1000);
@@ -186,10 +181,9 @@ var play = function () {
   a5.addEventListener("click", add);
 };
 
-var highScore = {
-  name: document.getElementById("myText").value,
-  score: (score / 5) * 100,
-};
+
+// if answer is right or wrong
+
 var correct = document.createElement("div");
 keys = document.querySelector(".answer");
 correct.textContent = "CORRECT";
@@ -197,12 +191,16 @@ var incorrect = document.createElement("div");
 incorrect.textContent = "WRONG";
 start.addEventListener("click", setTime);
 
+//hides the function buttons until the end
+
 var hide = function () {
   unhiding = document.body;
   var grab = document.getElementById("hidden");
   grab.setAttribute("id", "unhidden");
   unhiding.append(grab);
 };
+
+
 var end = function () {
   quest.innerText = "Game Over";
   a1.innerText = "YOUR SCORE";
@@ -214,11 +212,13 @@ var end = function () {
   hide();
 };
 
+
+//High Scores
+
 add_new_entry=function(data, name, score){
   new_entry = {"name": name, "score": score}
   data.unshift(new_entry);
-  return data;
-console.log(data +'dadta')}
+console.log(data[0].name)}
 
 var add = function () {
   if (i == 4) {
@@ -244,42 +244,37 @@ var add = function () {
 var myFunction = function () {
   a1.textContent = document.getElementById("myText").value + " " + score * 20;
   inits = document.getElementById("myText").value;
-  //record.scre = score * 20;
-  //record.plyr = document.getElementById("myText").value;
   new_data = add_new_entry(data, document.getElementById("myText").value, score * 20);
   console.log(new_data +'newdata');
+  sortable = Object.fromEntries(
+    Object.entries(data).sort(([,a],[,b]) => a-b)
+  );
 
- function sortList(arr, reverse=false){return arr.sort((a,b)=>reverse ? b-a:a-b);}
- sorted_data=sortList(data);
-
-    localStorage.setItem("highScore", JSON.stringify(sorted_data));
-    console.log(JSON.stringify(sorted_data)+ 'et');
+    localStorage.setItem("highScore", JSON.stringify(sortable));
+    console.log(JSON.stringify(sortable)+ 'et');
     a1.textContent = document.getElementById("myText").value + " " + (score / 5) * 100;
     inits = document.getElementById("myText").value;
-    a2.textContent = "High Scores";
-    a3.textContent = sorted_data[0].name + " " + sorted_data[0].score;
-    a4.textContent = sorted_data[1].name + " " + sorted_data[1].score;
-    a5.textContent = sorted_data[2].name + " " + sorted_data[2].score;
-  
+    a2.textContent = "Scores";
+    a3.textContent = sortable[0].name + " " + sortable[0].score;
+    a4.textContent = sortable[1].name + " " + sortable[1].score;
+    a5.textContent = sortable[2].name + " " + sortable[2].score;
   }
  
 
   function renderLastScores() {
     // Use JSON.parse() to convert text to JavaScript object
     lastScores = JSON.parse(localStorage.getItem("highScore"));
+    if (lastScores == null){old_data=add_new_entry(data, "Han", 1);
+    old_data=add_new_entry(data, "Luke", 2);
+    old_data=add_new_entry(data, "Rey", 3)}else{
     old_data = add_new_entry(data, lastScores[0].name, lastScores[0].score);
     old_data = add_new_entry(data, lastScores[1].name, lastScores[1].score);
     old_data = add_new_entry(data, lastScores[2].name, lastScores[2].score);
-    old_data = add_new_entry(data, lastScores[3].name, lastScores[3].score);
-    console.log(lastScores[0].name); 
-    // Check if data is returned, if not exit out of the function
-    if (lastScores !== null) {
-      dummy_data = add_new_entry(data, "Obi", 0);
-    } else {
-//      return;
-    }
-  }
+    console.log(lastScores[0].name);
+// localStorage.clear();
+}
 
+    }
 
   function init() {
     // When the init function is executed, the code inside renderLastGrade function will also execute

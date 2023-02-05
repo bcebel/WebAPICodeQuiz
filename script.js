@@ -1,4 +1,13 @@
 //Global Variables
+
+data = [
+ // {"name": "John Doe", "score": 0},
+  {"":"","":""},
+
+]
+var add_new_entry
+var new_data
+var new_entry
 var allScores;
 var allScores;
 var highScore;
@@ -8,13 +17,13 @@ var memory;
 var questions = [
   {
     question: "Commonly used data types do not include",
-    answers: ["strings", "booleans", "alerts", "numbers"],
+    answers: ["strings", "booleans", "alerts", "numbers", "androids"],
     answer: "alerts",
   },
   {
     question:
       "The condition in an if/else statement is enclosed within ______ ",
-    answers: ["quotes", "curly braces", "parentheses", "square brackets"],
+    answers: ["quotes", "curly braces", "parentheses", "square brackets", "ferns"],
     answer: "parentheses",
   },
   {
@@ -23,6 +32,7 @@ var questions = [
       "numbers and strings",
       "other arrays",
       "booleans",
+      "nerdy jokes",
       "all of the above",
     ],
     answer: "all of the above",
@@ -30,13 +40,13 @@ var questions = [
   {
     question:
       "String values must be enclosed within _______ when being assigned to variables",
-    answers: ["commas", "curly braces", "quotes", "parentheses"],
+    answers: ["commas", "curly braces", "quotes", "parentheses", "string theory"],
     answer: "quotes",
   },
   {
     question:
       "A very useful tool used during development and debugging for printing content to the debugger is",
-    answers: ["JavaScript", "terminal/bash", "for loops", "console log"],
+    answers: ["JavaScript", "terminal/bash", "for loops", "console log", "caffeine"],
     answer: "console log",
 
   },
@@ -46,12 +56,6 @@ var questions = [
 var start = document.querySelector(".start-button");
 var timer = document.querySelector(".timer");
 var displayQA = document.getElementsByClassName("list");
-var record = [
-  {
-    plyr: inits,
-    scre: score,
-  },
-];
 var inits;
 
 var secondsLeft = 45;
@@ -62,9 +66,7 @@ var score = 0;
 var k = 6;
 var m;
 
-//Functions
 
-//timer/start
 function setTime() {
   start.remove();
   play();
@@ -76,7 +78,7 @@ function setTime() {
       timer.textContent = "Time's up!";
 
       // Stops execution of action at set interval
-      clearInterval(timerInterval);
+      //clearInterval(timerInterval);
       end();
     }
   }, 1000);
@@ -207,10 +209,16 @@ var end = function () {
   timer.remove();
   a2.textContent = "";
   a3.textContent = "";
-  a4.textContent = record.scre;
+  a4.textContent ="";
   a5.textContent = "";
   hide();
 };
+
+add_new_entry=function(data, name, score){
+  new_entry = {"name": name, "score": score}
+  data.unshift(new_entry);
+  return data;
+console.log(data +'dadta')}
 
 var add = function () {
   if (i == 4) {
@@ -236,52 +244,41 @@ var add = function () {
 var myFunction = function () {
   a1.textContent = document.getElementById("myText").value + " " + score * 20;
   inits = document.getElementById("myText").value;
-  record.scre = score * 20;
-  record.plyr = document.getElementById("myText").value;
+  //record.scre = score * 20;
+  //record.plyr = document.getElementById("myText").value;
+  new_data = add_new_entry(data, document.getElementById("myText").value, score * 20);
+  console.log(new_data +'newdata');
 
-  saveHighScore();
+ function sortList(arr, reverse=false){return arr.sort((a,b)=>reverse ? b-a:a-b);}
+ sorted_data=sortList(data);
 
-  function saveHighScore() {
-    // Save related form data as an object
-    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
-    allScores={
-      ...highScore,
-      ...lastScores,
-    };
-    console.log(allScores.name + "as");
-    localStorage.setItem("highScore", JSON.stringify(allScores));
-    console.log(JSON.stringify(allScores)+ 'et');
+    localStorage.setItem("highScore", JSON.stringify(sorted_data));
+    console.log(JSON.stringify(sorted_data)+ 'et');
+    a1.textContent = document.getElementById("myText").value + " " + (score / 5) * 100;
+    inits = document.getElementById("myText").value;
+    a2.textContent = "High Scores";
+    a3.textContent = sorted_data[0].name + " " + sorted_data[0].score;
+    a4.textContent = sorted_data[1].name + " " + sorted_data[1].score;
+    a5.textContent = sorted_data[2].name + " " + sorted_data[2].score;
+  
   }
-  renderLastScores();
+ 
 
   function renderLastScores() {
     // Use JSON.parse() to convert text to JavaScript object
     lastScores = JSON.parse(localStorage.getItem("highScore"));
-    console.log(lastScores.name + 'ls');
+    old_data = add_new_entry(data, lastScores[0].name, lastScores[0].score);
+    old_data = add_new_entry(data, lastScores[1].name, lastScores[1].score);
+    old_data = add_new_entry(data, lastScores[2].name, lastScores[2].score);
+    old_data = add_new_entry(data, lastScores[3].name, lastScores[3].score);
+    console.log(lastScores[0].name); 
     // Check if data is returned, if not exit out of the function
     if (lastScores !== null) {
-      a3.textContent = highScore.name;
-      a4.textContent = highScore.score;
-
-      //document.getElementById("saved-grade").innerHTML = highScore.score;
-      //document.getElementById("saved-comment").innerHTML = highScore.comment;
+      dummy_data = add_new_entry(data, "Obi", 0);
     } else {
-      return;
+//      return;
     }
   }
-
-  a1.textContent =
-    document.getElementById("myText").value + " " + (score / 5) * 100;
-  inits = document.getElementById("myText").value;
-  record.scre = (score / 5) * 100;
-  record.plyr = document.getElementById("myText").value;
-
-
-  console.log(record.scre + " " + record.plyr);
-  a2.textContent = "High Scores";
-  a3.textContent = lastScores.name + " " + lastScores.score;
-  a4.textContent = lastScores.name + " " + lastScores.score;
-  a5.textContent = lastScores.name + " " + lastScores.score;
 
 
   function init() {
@@ -289,4 +286,33 @@ var myFunction = function () {
     renderLastScores();
   }
   init();
-};
+
+
+
+
+
+
+
+
+//data = [
+//  {"name": "John Doe", "score": 90},
+//  {"name": "Jane Doe", "score": 85},
+//  {"name": "Jim Smith", "score": 95},
+
+//]
+
+//def add_new_entry(data, name, score):
+//  new_entry = {"name": name, "score": score}
+//  data.append(new_entry)
+//  return data
+
+//new_data = add_new_entry(data, "Mike Johnson", 92)
+//print(new_data)
+
+
+
+//def sort_by_score(data):
+//    return sorted(data, key=lambda x: x["score"], reverse=True)
+
+//sorted_data = sort_by_score(data)
+//print(sorted_data)
